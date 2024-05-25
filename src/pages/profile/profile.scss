@@ -1,0 +1,20 @@
+@import "../../style.scss";
+
+.profile {
+  @include themify($themes) {
+    background-color: themed("bgSoft");
+
+    .profileContainer {
+      padding: 20px 70px;
+      min-height: 84.7vh;
+
+      @include mobile {
+        padding: 10px;
+      }
+
+      @include tablet {
+        padding: 20px;
+      }
+    }
+  }
+}

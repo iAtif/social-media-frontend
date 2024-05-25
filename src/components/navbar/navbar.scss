@@ -1,0 +1,96 @@
+@import "../../style.scss";
+
+.navbar {
+  @include themify($themes) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    height: 50px;
+    border-bottom: 1px solid themed("border");
+    position: sticky;
+    top: 0;
+    background-color: themed("bg");
+    color: themed("textColor");
+    z-index: 999;
+
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+
+      span {
+        font-weight: bold;
+        font-size: 20px;
+        color: themed("logo");
+      }
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      .user {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 500;
+
+        img {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+          span {
+            cursor: pointer;
+          }
+
+        .dropdown {
+          position: absolute;
+          top: 80%;
+          right: 0.5%;
+          background-color: themed("bg");
+          border: 1px solid lightgray;
+          border-radius: 5px;
+          padding: 5px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+          span {
+            display: block;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+          }
+
+          span:hover {
+            background-color: lightgray;
+          }
+          .dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: themed("bg");
+            border: 1px solid themed("border");
+            border-radius: 5px;
+            padding: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+  
+            span {
+              display: block;
+              padding: 10px;
+              cursor: pointer;
+              transition: background-color 0.3s;
+            }
+  
+            span:hover {
+              background-color: themed("bg");
+            }  
+      }
+    }
+  }
+}
+}
+}
