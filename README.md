@@ -1,4 +1,4 @@
-# Simple Social Media Application
+# Simple Social Media Application - Frontend
 
 This project is a simple social media application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) with user authentication and authorization features. The application allows users to register, log in, create posts with images and descriptions, like posts, and manage their own posts. Authentication is handled using JWT for secure user verification.
 
