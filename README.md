@@ -31,13 +31,6 @@ This project is a simple social media application built using the MERN stack (Mo
 - **Database**: MongoDB
 - **Authentication**: JWT for user authentication.
 
-## Evaluation Criteria
-
-- **Code Quality**: Clean, well-documented, and maintainable code.
-- **Functionality**: Correct implementation of the specified features.
-- **Security**: Proper handling of authentication and authorization.
-- **User Experience**: Intuitive and responsive user interface.
-
 ## Setup Instructions
 
 ### Prerequisites
