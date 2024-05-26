@@ -1,42 +1,35 @@
 # Simple Social Media Application - Frontend
 
-This project is a simple social media application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) with user authentication and authorization features. The application allows users to register, log in, create posts with images and descriptions, like posts, and manage their own posts. Authentication is handled using JWT for secure user verification.
+This is the frontend of a social media app built with the MERN stack (MongoDB, Express.js, React.js, Node.js). Users can sign up, log in, create posts with images and descriptions, like posts, and manage their own posts. We use JWT for secure user authentication.
 
 ## Features
 
-### 1. User Authentication
+1. **User Authentication**
 
-- Implement user registration and login functionality.
-- Use JWT or a third-party service for secure authentication.
+   - Sign up and log in.
+   - Secure authentication with JWT.
 
-### 2. Post Creation
+2. **Post Creation**
 
-- Allow authenticated users to create posts.
-- Each post should include an image and a description.
+   - Create posts with images and descriptions.
 
-### 3. Post Interaction
+3. **Post Interaction**
 
-- Users should be able to like posts created by others.
-- Display the number of likes for each post.
+   - Like posts created by others.
+   - See the number of likes for each post.
 
-### 4. Post Management
-
-- Only the user who created a post should have the ability to delete it.
-- Implement authorization checks to enforce this rule.
+4. **Post Management**
+   - Only the creator can edit or delete their post.
 
 ## Requirements
 
 - **Frontend**: React.js
-- **Backend**: Node.js, Express.js
-- **Database**: MongoDB
-- **Authentication**: JWT for user authentication.
 
 ## Setup Instructions
 
 ### Prerequisites
 
 - Node.js
-- MongoDB
 - npm or yarn
 
 ### Installation
@@ -45,7 +38,7 @@ This project is a simple social media application built using the MERN stack (Mo
 
    ```sh
    git clone https://github.com/iAtif/social-media-frontend.git
-   cd your-repo-name
+   cd social-media-frontend
    ```
 
 2. **Install dependencies:**
