@@ -1,6 +1,6 @@
 # Simple Social Media Application - Frontend
 
-This is the frontend of a social media app built with the MERN stack (MongoDB, Express.js, React.js, Node.js). Users can sign up, log in, create posts with images and descriptions, like posts, and manage their own posts. We use JWT for secure user authentication.
+This is the frontend of a social media app built with the MERN stack (MongoDB, Express.js, React.js, Node.js). Users can sign up, log in, create posts with images and descriptions, like posts, and manage their own posts.
 
 ## Features
 
