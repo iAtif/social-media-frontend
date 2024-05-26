@@ -3,10 +3,10 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import SaveIcon from '@mui/icons-material/Save';
-import CancelIcon from '@mui/icons-material/Cancel';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import SaveIcon from "@mui/icons-material/Save";
+import CancelIcon from "@mui/icons-material/Cancel";
 import { formatDistanceToNow } from "date-fns";
 import { useAuth } from "../../context/Auth";
 import user from "../images/user.jpg";
@@ -23,26 +23,28 @@ const Post = ({ post, onDelete }) => {
   const location = useLocation();
 
   useEffect(() => {
-    const userLiked = post.likes.some(like => like._id === auth?.user?.userId);
+    const userLiked = post.likes.some(
+      (like) => like._id === auth?.user?.userId
+    );
     setLiked(userLiked);
     setLikes(post.likes.length);
   }, [post.likes, auth?.user?.userId]);
 
   const toggleLike = async () => {
-    const newLikedState = !liked; 
+    const newLikedState = !liked;
     try {
       setLiked(newLikedState);
-      setLikes(prevLikes => newLikedState ? prevLikes + 1 : prevLikes - 1);
+      setLikes((prevLikes) => (newLikedState ? prevLikes + 1 : prevLikes - 1));
 
       await axios.put(
         `${baseUrl}/post/${post._id}/${newLikedState ? "like" : "unlike"}`
       );
     } catch (error) {
-      setLiked(prevLiked => !prevLiked);
-      setLikes(prevLikes => newLikedState ? prevLikes - 1 : prevLikes + 1);
+      setLiked((prevLiked) => !prevLiked);
+      setLikes((prevLikes) => (newLikedState ? prevLikes - 1 : prevLikes + 1));
       console.error("Error liking the post:", error);
     }
-  };  
+  };
 
   const handleEdit = async () => {
     try {
@@ -68,69 +70,72 @@ const Post = ({ post, onDelete }) => {
 
   return (
     <div className="post-wrapper">
-    <div className="post">
-      <div className="container">
-        <div className="user">
-          <div className="userInfo">
-            <img
-              src = {user}
-              alt = "user"
-            />
-            <div className="details">
-              <span className="name">{post.createdBy.username}</span>
-              <span className="date">
-                {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
-              </span>
+      <div className="post">
+        <div className="container">
+          <div className="user">
+            <div className="userInfo">
+              <img src={user} alt="user" />
+              <div className="details">
+                <span className="name">{post.createdBy.username}</span>
+                <span className="date">
+                  {formatDistanceToNow(new Date(post.createdAt), {
+                    addSuffix: true,
+                  })}
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="content">
-          {editing ? (
-            <input
-              value={newDescription}
-              onChange={(e) => setNewDescription(e.target.value)}
-            />
-          ) : (
-            <p>{post.description}</p>
-          )}
-          <img src={`${baseUrl}/${post.image}`} alt="Post content" />
-        </div>
-        <div className="info">
-        <div className="item" onClick={toggleLike}>
-          {liked ? <FavoriteOutlinedIcon /> : <FavoriteBorderOutlinedIcon />}
-          {likes} Likes
-        </div>
-        {location.pathname !== "/" && (
-          <>
+          <div className="content">
             {editing ? (
-            <>
-              <div className="item" onClick={handleEdit}>
-                <SaveIcon />
-                Save
-              </div>
-              <div className="item" onClick={handleCancelEdit}>
-                <CancelIcon />
-                Cancel
-              </div>
-            </>
+              <input
+                value={newDescription}
+                onChange={(e) => setNewDescription(e.target.value)}
+              />
             ) : (
-            <>
-              <div className="item" onClick={() => setEditing(true)}>
-                <EditIcon />
-                Edit
-              </div>
-              <div className="item" onClick={() => onDelete(post._id)}>
-                <DeleteIcon />
-                Delete
-              </div>
-            </>
-          )}
-        </>
-      )}
+              <p>{post.description}</p>
+            )}
+            <img src={`${baseUrl}/${post.image}`} alt="Post content" />
+          </div>
+          <div className="info">
+            <div className="item" onClick={toggleLike}>
+              {liked ? (
+                <FavoriteOutlinedIcon />
+              ) : (
+                <FavoriteBorderOutlinedIcon />
+              )}
+              {likes} Likes
+            </div>
+            {location.pathname !== "/" && (
+              <>
+                {editing ? (
+                  <>
+                    <div className="item" onClick={handleEdit}>
+                      <SaveIcon />
+                      Save
+                    </div>
+                    <div className="item" onClick={handleCancelEdit}>
+                      <CancelIcon />
+                      Cancel
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="item" onClick={() => setEditing(true)}>
+                      <EditIcon />
+                      Edit
+                    </div>
+                    <div className="item" onClick={() => onDelete(post._id)}>
+                      <DeleteIcon />
+                      Delete
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  </div>
   );
 };
 

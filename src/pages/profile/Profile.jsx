@@ -1,7 +1,7 @@
 import "./profile.scss";
 import React, { useEffect, useState } from "react";
 import Post from "../../components/post/Post";
-import Share from "../../components/share/Share"
+import Share from "../../components/share/Share";
 import { useAuth } from "../../context/Auth";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -18,7 +18,9 @@ const Profile = () => {
         const filteredPosts = response.data.post.filter(
           (post) => post.createdBy._id === auth.user.userId
         );
-        filteredPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        filteredPosts.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
         setPosts(filteredPosts);
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -37,7 +39,7 @@ const Profile = () => {
       };
       await axios.delete(`${baseUrl}/post/${postId}`, config);
       setPosts(posts.filter((post) => post._id !== postId));
-      toast.success("Post deleted successfully")
+      toast.success("Post deleted successfully");
     } catch (error) {
       console.error("Error deleting post:", error);
     }
@@ -46,12 +48,12 @@ const Profile = () => {
   return (
     <div className="profile">
       <div className="profileContainer">
-      <Share/>
+        <Share />
         <div className="posts">
           {posts.map((post) => (
-            <Post key={post._id} post={post} onDelete={handleDelete}/>
+            <Post key={post._id} post={post} onDelete={handleDelete} />
           ))}
-      </div>
+        </div>
       </div>
     </div>
   );

@@ -12,11 +12,13 @@ const Posts = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/post`)
+        const response = await axios.get(`${baseUrl}/post`);
         const filteredPosts = response.data.post.filter(
           (post) => post.createdBy._id !== auth.user.userId
         );
-        filteredPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        filteredPosts.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
         setPosts(filteredPosts);
       } catch (error) {
         console.error("Error fetching posts:", error);

@@ -43,10 +43,7 @@ const Navbar = () => {
       </div>
       <div className="right">
         <div className="user">
-          <img
-            src = {user}
-            alt = "user"
-          />
+          <img src={user} alt="user" />
           <span onClick={toggleDropdown}>{auth?.user?.username}</span>
           {dropdownOpen && (
             <div className="dropdown">
@@ -54,7 +51,9 @@ const Navbar = () => {
                 to={`/profile`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <span className="name" onClick={toggleDropdown}>Profile</span>
+                <span className="name" onClick={toggleDropdown}>
+                  Profile
+                </span>
               </Link>
               <span onClick={handleLogout}>Logout</span>
             </div>

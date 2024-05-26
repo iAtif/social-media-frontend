@@ -1,6 +1,6 @@
 import "./share.scss";
 import React, { useState } from "react";
-import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
+import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import { useAuth } from "../../context/Auth";
 import toast from "react-hot-toast";
 import user from "../images/user.jpg";
@@ -44,20 +44,17 @@ const Share = () => {
       toast.error("Failed to create post");
     }
   };
-  
+
   return (
     <div className="share">
       <div className="container">
         <div className="top">
-          <img
-            src={user}
-            alt="user"
-          />
-          <input 
-            type="text" 
+          <img src={user} alt="user" />
+          <input
+            type="text"
             placeholder={`What's on your mind ${auth?.user?.username}?`}
             value={description}
-            onChange={(e) => setDescription(e.target.value)} 
+            onChange={(e) => setDescription(e.target.value)}
           />
         </div>
         {imagePreview && (
@@ -68,11 +65,11 @@ const Share = () => {
         <hr />
         <div className="bottom">
           <div className="left">
-            <input 
-              type="file" 
-              id="file" 
-              style={{display:"none"}} 
-              onChange={handleImageChange} 
+            <input
+              type="file"
+              id="file"
+              style={{ display: "none" }}
+              onChange={handleImageChange}
             />
             <label htmlFor="file">
               <div className="item">

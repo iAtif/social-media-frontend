@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import toast  from 'react-hot-toast';
+import toast from "react-hot-toast";
 import { useAuth } from "../../context/Auth";
 import axios from "axios";
 import "./login.scss";
@@ -28,7 +28,7 @@ const Login = () => {
           token: res.data.token,
         });
         localStorage.setItem("auth", JSON.stringify(res.data));
-        navigate("/")
+        navigate("/");
         toast.success("Login Successful");
       } else {
         console.log(res);
@@ -48,30 +48,30 @@ const Login = () => {
   return (
     <div className="login">
       <div className="card">
-          <h1>Login</h1>
-          <form onSubmit={handleSubmit}>
-          <input 
-              type="email" 
-              value={email}
-              onChange={(e) => setemail(e.target.value)}  
-              placeholder="Email" 
-              required
-            />
-            <input 
-              type="password" 
-              value={password}
-              onChange={(e) => setpassword(e.target.value)} 
-              placeholder="Password" 
-              required
-            />
-            <button>Login</button>
-          </form>
-          <div className="register-prompt">
-            <span>Don't have an account?</span>
-            <Link to="/register">Register</Link>
-          </div>
+        <h1>Login</h1>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setemail(e.target.value)}
+            placeholder="Email"
+            required
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setpassword(e.target.value)}
+            placeholder="Password"
+            required
+          />
+          <button>Login</button>
+        </form>
+        <div className="register-prompt">
+          <span>Don't have an account?</span>
+          <Link to="/register">Register</Link>
         </div>
       </div>
+    </div>
   );
 };
 

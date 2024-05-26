@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import toast  from 'react-hot-toast';
+import toast from "react-hot-toast";
 import axios from "axios";
 import "./register.scss";
 
@@ -16,25 +16,21 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        `${BASE_URL}/auth/register`,
-        {
-          username,
-          email,
-          password,
-          confirmPassword,
-        }
-      );
+      const res = await axios.post(`${BASE_URL}/auth/register`, {
+        username,
+        email,
+        password,
+        confirmPassword,
+      });
       // Check if registration was successful
       if (res.data.success) {
         toast.success(res.data.message);
-        navigate("/login")
+        navigate("/login");
       } else {
         toast.error(res.data.message);
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        // If the server returns a 400 error, display the error message
         toast.error(error.response.data.message);
       } else {
         console.log(error);
@@ -49,33 +45,33 @@ const Register = () => {
         <div className="right">
           <h1>Register</h1>
           <form onSubmit={handleSubmit}>
-            <input 
-              type="text" 
+            <input
+              type="text"
               value={username}
-              onChange={(e) => setusername(e.target.value)} 
-              placeholder="Username" 
+              onChange={(e) => setusername(e.target.value)}
+              placeholder="Username"
               required
             />
-            <input 
-              type="email" 
+            <input
+              type="email"
               value={email}
-              onChange={(e) => setemail(e.target.value)} 
-              placeholder="Email" 
+              onChange={(e) => setemail(e.target.value)}
+              placeholder="Email"
               required
             />
-            <input 
-              type="password" 
+            <input
+              type="password"
               value={password}
-              onChange={(e) => setpassword(e.target.value)} 
+              onChange={(e) => setpassword(e.target.value)}
               placeholder="Password"
-              required 
+              required
             />
-            <input 
-              type="password" 
+            <input
+              type="password"
               value={confirmPassword}
-              onChange={(e) => setconfirmpassword(e.target.value)} 
+              onChange={(e) => setconfirmpassword(e.target.value)}
               placeholder="Confirm Password"
-              required 
+              required
             />
             <button>Register</button>
           </form>
