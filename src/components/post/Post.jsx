@@ -1,5 +1,5 @@
 import "./post.scss";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
@@ -21,6 +21,7 @@ const Post = ({ post, onDelete }) => {
   const [editing, setEditing] = useState(false);
   const [newDescription, setNewDescription] = useState(post.description);
   const location = useLocation();
+  const inputRef = useRef(null);
 
   useEffect(() => {
     const userLiked = post.likes.some(
@@ -68,71 +69,72 @@ const Post = ({ post, onDelete }) => {
     setEditing(false);
   };
 
+  useEffect(() => {
+    if (editing) {
+      inputRef.current.focus();
+    }
+  }, [editing]);
+
   return (
-    <div className="post-wrapper">
-      <div className="post">
-        <div className="container">
-          <div className="user">
-            <div className="userInfo">
-              <img src={user} alt="user" />
-              <div className="details">
-                <span className="name">{post.createdBy.username}</span>
-                <span className="date">
-                  {formatDistanceToNow(new Date(post.createdAt), {
-                    addSuffix: true,
-                  })}
-                </span>
-              </div>
+    <div className="post">
+      <div className="container">
+        <div className="user">
+          <div className="userInfo">
+            <img src={user} alt="user" />
+            <div className="details">
+              <span className="name">{post.createdBy.username}</span>
+              <span className="date">
+                {formatDistanceToNow(new Date(post.createdAt), {
+                  addSuffix: true,
+                })}
+              </span>
             </div>
           </div>
-          <div className="content">
-            {editing ? (
-              <input
-                value={newDescription}
-                onChange={(e) => setNewDescription(e.target.value)}
-              />
-            ) : (
-              <p>{post.description}</p>
-            )}
-            <img src={`${baseUrl}/${post.image}`} alt="Post content" />
+        </div>
+        <div className="content">
+          {editing ? (
+            <input
+              ref={inputRef}
+              value={newDescription}
+              onChange={(e) => setNewDescription(e.target.value)}
+            />
+          ) : (
+            <p>{post.description}</p>
+          )}
+          <img src={`${baseUrl}/${post.image}`} alt="Post content" />
+        </div>
+        <div className="info">
+          <div className="item" onClick={toggleLike}>
+            {liked ? <FavoriteOutlinedIcon /> : <FavoriteBorderOutlinedIcon />}
+            {likes} Likes
           </div>
-          <div className="info">
-            <div className="item" onClick={toggleLike}>
-              {liked ? (
-                <FavoriteOutlinedIcon />
+          {location.pathname !== "/" && (
+            <>
+              {editing ? (
+                <>
+                  <div className="item" onClick={handleEdit}>
+                    <SaveIcon />
+                    Save
+                  </div>
+                  <div className="item" onClick={handleCancelEdit}>
+                    <CancelIcon />
+                    Cancel
+                  </div>
+                </>
               ) : (
-                <FavoriteBorderOutlinedIcon />
+                <>
+                  <div className="item" onClick={() => setEditing(true)}>
+                    <EditIcon />
+                    Edit
+                  </div>
+                  <div className="item" onClick={() => onDelete(post._id)}>
+                    <DeleteIcon />
+                    Delete
+                  </div>
+                </>
               )}
-              {likes} Likes
-            </div>
-            {location.pathname !== "/" && (
-              <>
-                {editing ? (
-                  <>
-                    <div className="item" onClick={handleEdit}>
-                      <SaveIcon />
-                      Save
-                    </div>
-                    <div className="item" onClick={handleCancelEdit}>
-                      <CancelIcon />
-                      Cancel
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="item" onClick={() => setEditing(true)}>
-                      <EditIcon />
-                      Edit
-                    </div>
-                    <div className="item" onClick={() => onDelete(post._id)}>
-                      <DeleteIcon />
-                      Delete
-                    </div>
-                  </>
-                )}
-              </>
-            )}
-          </div>
+            </>
+          )}
         </div>
       </div>
     </div>
