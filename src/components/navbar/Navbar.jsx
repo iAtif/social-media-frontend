@@ -1,6 +1,10 @@
 import "./navbar.scss";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PersonIcon from "@mui/icons-material/Person";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useAuth } from "../../context/Auth";
 import { Link, useNavigate } from "react-router-dom";
@@ -44,7 +48,10 @@ const Navbar = () => {
       <div className="right">
         <div className="user">
           <img src={user} alt="user" />
-          <span onClick={toggleDropdown}>{auth?.user?.username}</span>
+          <span onClick={toggleDropdown}>
+            {auth?.user?.username}{" "}
+            {dropdownOpen ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+          </span>
           {dropdownOpen && (
             <div className="dropdown">
               <Link
@@ -52,10 +59,14 @@ const Navbar = () => {
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <span className="name" onClick={toggleDropdown}>
+                  <PersonIcon />
                   Profile
                 </span>
               </Link>
-              <span onClick={handleLogout}>Logout</span>
+              <span onClick={handleLogout}>
+                <LogoutIcon />
+                Logout
+              </span>
             </div>
           )}
         </div>
